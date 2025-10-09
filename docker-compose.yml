@@ -1,0 +1,60 @@
+version: "3.8"
+
+volumes:
+  postgres-storage-data:
+
+networks:
+  myNetwork:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: valkyrie
+      POSTGRES_PASSWORD: valkyrie3008
+      POSTGRES_DB: valkyrieDB
+    volumes:
+      - postgres-storage-data:/var/lib/postgresql/data
+      - ./DBMS/dbms.sql:/docker-entrypoint-initdb.d/dbms.sql
+    networks:
+      - myNetwork
+
+  api:
+    build: ./api
+    depends_on:
+      - authentication
+    ports:
+      - "8080:8080"
+    environment:
+      JWTS_SECURITY: 4Pm+VWXTf/9yC5Qw+zA3mee6CluFCUfVYM+41u2Me90=
+      PORT: 8080
+    networks:
+      - myNetwork
+  
+  authentication:
+    build: ./authentication
+    depends_on:
+      - postgres
+    ports:
+      - "8081:8081"
+    environment:
+      URL: jdbc:postgresql://postgres:5432/authentication
+      USERNAME: valkyrie
+      PASSWORD: valkyrie3008
+      JWTS_SECURITY: 4Pm+VWXTf/9yC5Qw+zA3mee6CluFCUfVYM+41u2Me90=
+      PORT: 8081
+    networks:
+      - myNetwork
+  service:
+    build: ./service
+    ports:
+      - "8761:8761"
+    environment:
+      HOSTNAME: service
+      JWTS_SECURITY: 4Pm+VWXTf/9yC5Qw+zA3mee6CluFCUfVYM+41u2Me90=
+      PORT: 8761
+    networks:
+      - myNetwork
