@@ -10,7 +10,7 @@ import com.bytetrio.authentication.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 
-    @Query(value = "select 1 from users where username = :username", nativeQuery = true)
-    Integer checkIfUserPresent(@Param("username") String username);
+    // @Query(value = "select 1 from users where username = :username", nativeQuery = true)
+    // Integer checkIfUserPresent(@Param("username") String username);
 
 }

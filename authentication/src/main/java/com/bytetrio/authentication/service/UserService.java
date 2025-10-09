@@ -31,14 +31,16 @@ public class UserService {
 
     public ResponseEntity<String> signUp(User user) {
         
-        if (userRepo.checkIfUserPresent(user.getUsername()) == 1) {
+        if (userRepo.existsById(user.getUsername())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User already present plz SignIn...");
         }
     
         user.setPassword(new BCryptPasswordEncoder(12).encode(user.getPassword()))
             .setRole("ROLE_" + user.getRole().toUpperCase());
 
-        return userRepo.checkIfUserPresent(user.getUsername()) == 1? 
+        userRepo.save(user);
+
+        return userRepo.existsById(user.getUsername())? 
             ResponseEntity.status(HttpStatus.ACCEPTED).body("Sign Up is success plz signIn") : 
             ResponseEntity.status(HttpStatus.BAD_REQUEST).body("SignUp is not possible...");
 
