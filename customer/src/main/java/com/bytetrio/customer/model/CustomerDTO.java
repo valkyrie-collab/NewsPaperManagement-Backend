@@ -5,6 +5,7 @@ public class CustomerDTO {
     private String firstName;
     private String secondName;
     private String bio;
+    private String email;
     private long phoneNumber;
     private String address;
     private ImageDTO imageDTO;
@@ -13,6 +14,13 @@ public class CustomerDTO {
 
     public CustomerDTO setId(String id) {
         this.id = id;
+        return this;
+    }
+
+    public String getEmail() {return email;}
+
+    public CustomerDTO setEmail(String email) {
+        this.email = email;
         return this;
     }
 
