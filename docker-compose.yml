@@ -57,7 +57,7 @@ services:
     ports:
       - "8082:8082"
     environment:
-      URL: jdbc:postgresql://postgres:5432/authentication
+      URL: jdbc:postgresql://postgres:5432/customer
       USERNAME: valkyrie
       PASSWORD: valkyrie3008
       JWTS_SECURITY: 4Pm+VWXTf/9yC5Qw+zA3mee6CluFCUfVYM+41u2Me90=
