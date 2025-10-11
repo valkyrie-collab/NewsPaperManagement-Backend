@@ -54,7 +54,7 @@ public class UserService {
         );
 
         if (authentication.isAuthenticated()) {
-            token = config.generateToken(token, authentication.getAuthorities());
+            token = config.generateToken(user.getUsername(), authentication.getAuthorities());
             return ResponseEntity.status(HttpStatus.OK).body(token);
         }
 

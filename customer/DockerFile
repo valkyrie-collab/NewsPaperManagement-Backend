@@ -1,0 +1,4 @@
+FROM openjdk:26-oraclelinux9
+LABEL authors="valkyrie"
+ADD target/customer.jar customer.jar
+ENTRYPOINT ["java", "-jar", "/customer.jar"]

@@ -1,3 +1,27 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "sqltools.connections": [
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "AuthenticationDatabase",
+            "database": "authentication",
+            "username": "postgres",
+            "password": "postgres30082004"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "CustomerDatabase",
+            "database": "customer",
+            "username": "postgres",
+            "password": "postgres30082004"
+        }
+    ]
 }
