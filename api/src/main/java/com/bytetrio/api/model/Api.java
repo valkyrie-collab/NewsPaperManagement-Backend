@@ -17,9 +17,24 @@ public class Api {
         return route(name).POST(finalName, http()).before(uri(initialName)).build();
     }
 
+    private RouterFunction<ServerResponse> get(String name, String initialName, String finalName) {
+        return route(name).GET(finalName, http()).before(uri(initialName)).build();
+    }
+
+    private RouterFunction<ServerResponse> delete(String name, String initialName, String finalName) {
+        return route(name).DELETE(finalName, http()).before(uri(initialName)).build();
+    }
+
     @Bean
     public RouterFunction<ServerResponse> routerFunction() {
-        return post("authentication", "http://localhost:8081", "/user/**");
+        return post("authentication", "http://localhost:8081", "/user/**")
+            .and(
+                post("customer-post", "http://localhost:8082", "/customer/**")
+            ).and(
+                get("customer-get", "http://localhost:8082", "/customer/**")
+            ).and(
+                delete("customer-delete", "http://localhost:8082", "/customer/**")
+            );
     }
 
 }
