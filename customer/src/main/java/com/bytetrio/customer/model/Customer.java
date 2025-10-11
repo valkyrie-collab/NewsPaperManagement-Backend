@@ -14,6 +14,7 @@ public class Customer {
     private String firstName;
     private String secondName;
     private String bio;
+    private String email;
     private long phoneNumber;
     private String address;
     @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
@@ -44,6 +45,13 @@ public class Customer {
 
     public Customer setBio(String bio) {
         this.bio = bio;
+        return this;
+    }
+
+    public String getEmail() {return email;}
+
+    public Customer setEmail(String email) {
+        this.email = email;
         return this;
     }
 
