@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bytetrio.customer.model.CustomerDTO;
 import com.bytetrio.customer.model.CustomerNameAddress;
+import com.bytetrio.customer.model.CustomerUpdate;
 import com.bytetrio.customer.service.CustomerService;
 
 @RestController
@@ -34,8 +36,8 @@ public class CustomerController {
     }
 
     @PostMapping("/update-customer")
-    public ResponseEntity<List<String>> update(@RequestPart String token, @RequestPart List<String> fieldNames, @RequestPart List<String> updatedListOfData) {
-        return service.update(token, fieldNames, updatedListOfData);
+    public ResponseEntity<List<String>> update(@RequestParam String token, @RequestBody List<CustomerUpdate> customerUpdate) {
+        return service.update(token, customerUpdate);
     }
 
     @GetMapping("/find-customer")

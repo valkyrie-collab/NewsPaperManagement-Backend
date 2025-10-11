@@ -50,7 +50,7 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
     @Query(value = "select 1 from image where customer_id = :customerId", nativeQuery = true)
     Integer checkImages(@Param("customerId") String customerId);
 
-    @Query(value = "select name, address, phone_number from customer", nativeQuery = true)
+    @Query(value = "select first_name, second_name, address, phone_number from customer", nativeQuery = true)
     List<CustomerNameAddress> getNameAddressPhoneNumber();
 
 }

@@ -16,6 +16,7 @@ import com.bytetrio.customer.config.TokenConfig;
 import com.bytetrio.customer.model.Customer;
 import com.bytetrio.customer.model.CustomerDTO;
 import com.bytetrio.customer.model.CustomerNameAddress;
+import com.bytetrio.customer.model.CustomerUpdate;
 import com.bytetrio.customer.model.Image;
 import com.bytetrio.customer.model.ImageDTO;
 import com.bytetrio.customer.repository.CustomerRepository;
@@ -54,41 +55,39 @@ public class CustomerService {
 
     } 
 
-    public ResponseEntity<List<String>> update(String token, List<String> fieldNames, List<String> updatedListOfData) {
-        int i = 0;
+    public ResponseEntity<List<String>> update(String token, List<CustomerUpdate> customerUpdates) {
         String id = config.getUsername(token);
         List<String> messages = new LinkedList<>();
 
-        for (String fieldName : fieldNames) {
+        for (CustomerUpdate customerUpdate : customerUpdates) {
 
-            switch (fieldName.toUpperCase()) {
+            switch (customerUpdate.getFieldName().toUpperCase()) {
                 case "FIRSTNAME": {
-                    messages.add(customerRepo.updateFirstName(updatedListOfData.get(i), id) > 0?
-                        fieldName + ": update successful...." : fieldName + ": not updated successfully....");
+                    messages.add(customerRepo.updateFirstName(customerUpdate.getUpdatedValue(), id) > 0?
+                        customerUpdate.getFieldName() + ": update successful...." : customerUpdate.getFieldName() + ": not updated successfully....");
                         break;
                 } case "SECONDNAME": {
-                    messages.add(customerRepo.updateSecondName(updatedListOfData.get(i), id) > 0?
-                        fieldName + ": update successful...." : fieldName + ": not updated successfully....");
+                    messages.add(customerRepo.updateSecondName(customerUpdate.getUpdatedValue(), id) > 0?
+                        customerUpdate.getFieldName() + ": update successful...." : customerUpdate.getFieldName() + ": not updated successfully....");
                         break;
                 } case "BIO": {
-                    messages.add(customerRepo.updateBio(updatedListOfData.get(i), id) > 0?
-                        fieldName + ": update successful...." : fieldName + ": not updated successfully....");
+                    messages.add(customerRepo.updateBio(customerUpdate.getUpdatedValue(), id) > 0?
+                        customerUpdate.getFieldName() + ": update successful...." : customerUpdate.getFieldName() + ": not updated successfully....");
                         break;
                 } case "PHONENUMBER": {    
-                    messages.add(customerRepo.updatePhoneNumber(Long.parseLong(updatedListOfData.get(i)), id) > 0?
-                        fieldName + ": update successful...." : fieldName + ": not updated successfully....");
+                    messages.add(customerRepo.updatePhoneNumber(Long.parseLong(customerUpdate.getUpdatedValue()), id) > 0?
+                        customerUpdate.getFieldName() + ": update successful...." : customerUpdate.getFieldName() + ": not updated successfully....");
                         break;
                 } case "ADDRESS": {
-                    messages.add(customerRepo.updateAddress(updatedListOfData.get(i), id) > 0?
-                        fieldName + ": update successful...." : fieldName + ": not updated successfully....");
+                    messages.add(customerRepo.updateAddress(customerUpdate.getUpdatedValue(), id) > 0?
+                        customerUpdate.getFieldName() + ": update successful...." : customerUpdate.getFieldName() + ": not updated successfully....");
                         break;
                 } default: {
-                    messages.add(fieldName + ": not updated successfully....");
+                    messages.add(customerUpdate.getFieldName() + ": not updated successfully....");
                     break;
                 }
             }
 
-            i++;
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(messages);

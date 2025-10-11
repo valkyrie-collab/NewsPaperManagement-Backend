@@ -1,20 +1,28 @@
 package com.bytetrio.customer.model;
 
 public class CustomerNameAddress {
-    private String name;
+    private String firstName;
+    private String secondName;
     private String address;
     private long phoneNumber;
 
-    public CustomerNameAddress(String name, String address, long phoneNumber) {
-        this.name = name; this.address = address; this.phoneNumber = phoneNumber;
+    public CustomerNameAddress(String firstName, String secondName, String address, long phoneNumber) {
+        this.firstName = firstName; this.secondName = secondName; this.address = address; this.phoneNumber = phoneNumber;
     }
 
     public CustomerNameAddress() {}
 
-    public String getName() {return name;}
+    public String getFirstName() {return firstName;}
 
-    public CustomerNameAddress setName(String name) {
-        this.name = name;
+    public CustomerNameAddress setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getSecondName() {return secondName;}
+
+    public CustomerNameAddress setSecondName(String secondName) {
+        this.secondName = secondName;
         return this;
     }
 
