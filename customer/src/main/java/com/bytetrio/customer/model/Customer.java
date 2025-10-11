@@ -16,7 +16,7 @@ public class Customer {
     private String bio;
     private long phoneNumber;
     private String address;
-    @OneToOne(mappedBy = "image",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
     private Image image;
 
     public String getId() {return id;}

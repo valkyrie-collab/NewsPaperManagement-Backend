@@ -37,6 +37,7 @@ public class CustomerService {
 
     public ResponseEntity<String> add(String token, String customerJsonDataString, MultipartFile imageFile) throws IOException {
         Customer customer = new ObjectMapper().readValue(doDecoding(customerJsonDataString), Customer.class);
+        System.out.println("Username: " + config.getUsername(token));
         customer.setId(config.getUsername(token));
 
         if (imageFile != null) {
