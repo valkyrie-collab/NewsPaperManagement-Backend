@@ -38,7 +38,7 @@ public class CustomerService {
 
     public ResponseEntity<String> add(String token, String customerJsonDataString, MultipartFile imageFile) throws IOException {
         Customer customer = new ObjectMapper().readValue(doDecoding(customerJsonDataString), Customer.class);
-        System.out.println("Username: " + config.getUsername(token));
+        // System.out.println("Username: " + config.getUsername(token));
         customer.setId(config.getUsername(token));
 
         if (imageFile != null) {
@@ -80,6 +80,10 @@ public class CustomerService {
                         break;
                 } case "ADDRESS": {
                     messages.add(customerRepo.updateAddress(customerUpdate.getUpdatedValue(), id) > 0?
+                        customerUpdate.getFieldName() + ": update successful...." : customerUpdate.getFieldName() + ": not updated successfully....");
+                        break;
+                } case "EMAIL": {
+                    messages.add(customerRepo.updateEmail(customerUpdate.getUpdatedValue(), id) > 0?
                         customerUpdate.getFieldName() + ": update successful...." : customerUpdate.getFieldName() + ": not updated successfully....");
                         break;
                 } default: {

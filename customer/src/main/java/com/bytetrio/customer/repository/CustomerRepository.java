@@ -40,6 +40,11 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
 
     @Modifying
     @Transactional
+    @Query(value = "update customer set email = :updatedValue where id = :id", nativeQuery = true)
+    int updateEmail(@Param("updatedValue") String updatedValue, @Param("id") String id);
+
+    @Modifying
+    @Transactional
     @Query(value = "update customer set address = :updatedValue where id = :id", nativeQuery = true)
     int updateAddress(@Param("updatedValue") String updatedValue, @Param("id") String id);
 
