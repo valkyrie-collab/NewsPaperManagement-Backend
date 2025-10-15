@@ -23,5 +23,6 @@
             "username": "postgres",
             "password": "postgres30082004"
         }
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
 }
