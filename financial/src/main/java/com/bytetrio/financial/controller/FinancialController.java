@@ -14,7 +14,7 @@ import com.bytetrio.financial.model.CustomerFinancial;
 import com.bytetrio.financial.model.CustomerFinancialDTO;
 import com.bytetrio.financial.model.DeliveryFinancial;
 import com.bytetrio.financial.model.DeliveryFinancialDTO;
-import com.bytetrio.financial.model.Subscription;
+// import com.bytetrio.financial.model.Subscription;
 import com.bytetrio.financial.service.FinancialService;
 
 @RestController

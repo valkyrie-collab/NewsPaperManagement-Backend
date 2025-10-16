@@ -29,8 +29,8 @@ public class SecurityConfig {
         return security.csrf(c -> c.disable())
             .authorizeHttpRequests(
                 a -> a.requestMatchers("/user/sign-up", "/user/sign-in")
-                .permitAll().requestMatchers("/user/sign-up", "/user/sign-in")
-                .hasAnyRole("MEMBER", "MANAGER", "DELIVERY").anyRequest().authenticated()
+                .permitAll().requestMatchers("/user/**")
+                .hasAnyRole("CUSTOMER", "MANAGER", "DELIVERY").anyRequest().authenticated()
             ).httpBasic(Customizer.withDefaults())
             .sessionManagement(
                 s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
