@@ -30,11 +30,27 @@ public class TokenConfig {
 
     public String getUsername(String token) {return claims(token, Claims::getSubject);}
 
-    public boolean isAdmin(String token) {
+    public boolean isManager(String token) {
         List<?> object = claims(token, claim -> claim.get("roles", List.class));
         List<String> roles = object == null? List.of() : object.stream().map(Object::toString).toList();
         
-        return roles.isEmpty()? false : roles.getFirst().equals("ROLE_ADMIN")? true : false;
+        return roles.isEmpty()? false : roles.getFirst().equals("ROLE_MANAGER")? true : false;
+    
+    }
+
+    public boolean isMember(String token) {
+        List<?> object = claims(token, claim -> claim.get("roles", List.class));
+        List<String> roles = object == null? List.of() : object.stream().map(Object::toString).toList();
+        
+        return roles.isEmpty()? false : roles.getFirst().equals("ROLE_MEMBER")? true : false;
+    
+    }
+
+    public boolean isDelivery(String token) {
+        List<?> object = claims(token, claim -> claim.get("roles", List.class));
+        List<String> roles = object == null? List.of() : object.stream().map(Object::toString).toList();
+        
+        return roles.isEmpty()? false : roles.getFirst().equals("ROLE_DELIVERY")? true : false;
     
     }
 }
