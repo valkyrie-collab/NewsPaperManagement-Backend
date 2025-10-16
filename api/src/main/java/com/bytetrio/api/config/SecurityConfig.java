@@ -36,7 +36,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(
                 a -> a.requestMatchers("/user/sign-up", "/user/sign-in")
                 .permitAll().requestMatchers("/user/sign-up", "/user/sign-in")
-                .hasAnyRole("MEMBER", "USER", "DELIVERY").anyRequest().authenticated()
+                .hasAnyRole("MEMBER", "MANAGER", "DELIVERY").anyRequest().authenticated()
             ).httpBasic(Customizer.withDefaults())
             .sessionManagement(
                 s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
