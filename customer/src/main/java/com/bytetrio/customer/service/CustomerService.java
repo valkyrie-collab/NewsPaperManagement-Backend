@@ -39,6 +39,7 @@ public class CustomerService {
     public ResponseEntity<String> add(String token, String customerJsonDataString, MultipartFile imageFile) throws IOException {
         Customer customer = new ObjectMapper().readValue(doDecoding(customerJsonDataString), Customer.class);
         // System.out.println("Username: " + config.getUsername(token));
+        // System.out.println("customer: " + customer.toString());
         customer.setId(config.getUsername(token));
 
         if (imageFile != null) {
@@ -115,7 +116,7 @@ public class CustomerService {
 
         CustomerDTO customerDTO = new CustomerDTO().setAddress(customer.getAddress())
             .setBio(customer.getAddress()).setFirstName(customer.getFirstName())
-            .setId(customer.getId()).setImageDTO(imageDTO)
+            .setId(customer.getId()).setImageDTO(imageDTO).setEmail(customer.getEmail())
             .setPhoneNumber(customer.getPhoneNumber()).setSecondName(customer.getSecondName());
 
         return ResponseEntity.status(HttpStatus.OK).body(customerDTO);

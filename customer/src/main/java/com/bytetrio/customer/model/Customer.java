@@ -76,4 +76,10 @@ public class Customer {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Customer [id=" + id + ", firstName=" + firstName + ", secondName=" + secondName + ", bio=" + bio
+                + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address + "]";
+    }
+
 }
