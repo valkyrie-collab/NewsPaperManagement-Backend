@@ -1,5 +1,7 @@
 package com.bytetrio.financial.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,38 +29,38 @@ public class FinancialController {
     }
 
     @PostMapping("/add-customer-bill")
-    public ResponseEntity<String> addCustomerBill(@RequestParam String token, @RequestBody CustomerFinancial customerFinancial) {
-        return null;
+    public ResponseEntity<String> addCustomerBill(@RequestParam String token, @RequestParam String customerFinancialJsonString, @RequestParam String subscriptionJsonString) throws IOException {
+        return service.addCustomerFinance(token, customerFinancialJsonString, subscriptionJsonString);
     }
 
     @DeleteMapping("/cancel-subscription")
-    public ResponseEntity<String> cancelSubscription(@RequestParam String token) {
-        return null;
+    public ResponseEntity<String> cancelSubscription(@RequestParam String token, @RequestParam String customerId, @RequestParam String subscriptionId) {
+        return service.cancelSubscription(token, customerId, subscriptionId);
     }
 
     @GetMapping("/generate-bill")
-    public ResponseEntity<CustomerFinancialDTO> getBill(@RequestParam String token) {
-        return null;
+    public ResponseEntity<CustomerFinancialDTO> getBill(@RequestParam String token, @RequestParam String customerFinancialId) {
+        return service.generateBill(token, customerFinancialId);
     }
 
     @PostMapping("/delivery-done")
-    public ResponseEntity<String> addDelivery(@RequestParam String token, @RequestBody DeliveryFinancial deliveryFinancial) {
-        return null;
+    public ResponseEntity<String> addDelivery(@RequestParam String token, @RequestParam DeliveryFinancial deliveryFinancial, @RequestParam(required = false) String deliveryId) {
+        return service.addDeliveryData(token, deliveryFinancial, deliveryId);
     }
 
-    @GetMapping("/all-delivery")
-    public ResponseEntity<DeliveryFinancialDTO> getDelivery(@RequestParam String token) {
-        return null;
+    @GetMapping("/delivery-data")
+    public ResponseEntity<DeliveryFinancialDTO> getDelivery(@RequestParam String token, @RequestParam String deliveryFinancialId) {
+        return service.getDeliveryData(token, deliveryFinancialId);
     }
 
     @DeleteMapping("/remove-customer")
     public ResponseEntity<String> removeCustomerDetail(@RequestParam String token) {
-        return null;
+        return service.deleteCustomerData(token);
     }
 
     @DeleteMapping("/remove-delivery")
     public ResponseEntity<String> removeDeliveryDetails(@RequestParam String token) {
-        return null;
+        return service.deleteDeliveryFinancial(token);
     }
 
 }

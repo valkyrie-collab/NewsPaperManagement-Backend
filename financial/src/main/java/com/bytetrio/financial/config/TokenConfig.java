@@ -42,7 +42,7 @@ public class TokenConfig {
         List<?> object = claims(token, claim -> claim.get("roles", List.class));
         List<String> roles = object == null? List.of() : object.stream().map(Object::toString).toList();
         
-        return roles.isEmpty()? false : roles.getFirst().equals("ROLE_MEMBER")? true : false;
+        return roles.isEmpty()? false : roles.getFirst().equals("ROLE_CUSTOMER")? true : false;
     
     }
 

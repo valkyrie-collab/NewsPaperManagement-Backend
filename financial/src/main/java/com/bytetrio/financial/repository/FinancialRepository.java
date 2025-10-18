@@ -36,4 +36,9 @@ public interface FinancialRepository extends JpaRepository<CustomerFinancial, St
     @Transactional
     @Query(value = "insert into subscription_customer_financial ( customer_financial_id, subscription_id ) values (:username, :id)", nativeQuery = true)
     void insetSubscriptions(@Param("username") String username, @Param("id") String id);
+
+    @Query(value = "select case when exists (select 1 from customer_financial where customer_id = :customerId) then true else false end", nativeQuery = true)
+    boolean checkForCustomerFinancial(@Param("customerId") String customerId);
+
+    void deleteAllByCustomerId(String customerId);
 }
