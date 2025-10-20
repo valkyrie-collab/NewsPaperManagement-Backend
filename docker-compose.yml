@@ -65,6 +65,21 @@ services:
     networks:
       - myNetwork
 
+  financial:
+    build: ./financial
+    depends_on:
+      - postgres
+    ports:
+      - "8083:8083"
+    environment:
+      URL: jdbc:postgresql://postgres:5432/financial
+      USERNAME: valkyrie
+      PASSWORD: valkyrie3008
+      JWTS_SECURITY: 4Pm+VWXTf/9yC5Qw+zA3mee6CluFCUfVYM+41u2Me90=
+      PORT: 8083
+    networks:
+      - myNetwork
+      
   service:
     build: ./service
     ports:

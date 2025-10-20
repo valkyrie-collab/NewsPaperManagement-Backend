@@ -34,6 +34,12 @@ public class Api {
                 get("customer-get", "http://customer:8082", "/customer/**")
             ).and(
                 delete("customer-delete", "http://customer:8082", "/customer/**")
+            ).and(
+                post("financial-post", "http://financial:8082", "/financial/**")
+            ).and(
+                get("financial-get", "http://financial:8082", "/financial/**")
+            ).and(
+                delete("financial-delete", "http://financial:8082", "/financial/**")
             );
     }
 
