@@ -42,6 +42,16 @@
             "projectName": "customer",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-FinancialApplication<financial>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.bytetrio.financial.FinancialApplication",
+            "projectName": "financial",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

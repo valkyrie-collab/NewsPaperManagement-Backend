@@ -22,6 +22,17 @@
             "database": "customer",
             "username": "postgres",
             "password": "postgres30082004"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "FinancialDatabase",
+            "database": "financial",
+            "username": "postgres",
+            "password": "postgres30082004"
         }
     ],
     "java.configuration.updateBuildConfiguration": "automatic"

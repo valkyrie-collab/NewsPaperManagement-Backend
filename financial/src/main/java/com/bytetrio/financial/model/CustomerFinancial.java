@@ -1,12 +1,14 @@
 package com.bytetrio.financial.model;
 
 import java.util.Date;
-import java.util.List;
+// import java.util.List;
 
-import jakarta.persistence.CascadeType;
+// import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+// import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 // import jakarta.persistence.OneToMany;
 
@@ -20,8 +22,9 @@ public class CustomerFinancial {
     private Date subscriptionEndDate;
     private float cost;
     private boolean cancel = false;
-    @ManyToMany(mappedBy = "customerFinancials", cascade = CascadeType.ALL)
-    private List<Subscription> subscriptions;
+    @ManyToOne
+    @JoinColumn(name = "subscription_id", referencedColumnName = "id")
+    private Subscription subscription;
     
     public String getId() {
         return id;
@@ -37,11 +40,11 @@ public class CustomerFinancial {
         this.customerId = customerId;
         return this;
     }
-    public List<Subscription> getSubscription() {
-        return subscriptions;
+    public Subscription getSubscription() {
+        return subscription;
     }
-    public CustomerFinancial setSubscription(List<Subscription> subscriptions) {
-        this.subscriptions = subscriptions;
+    public CustomerFinancial setSubscription(Subscription subscription) {
+        this.subscription = subscription;
         return this;
     }
     public Date getSubscriptionStartDate() {

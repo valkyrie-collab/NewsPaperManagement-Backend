@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bytetrio.financial.model.CustomerFinancial;
+// import com.bytetrio.financial.model.CustomerFinancial;
 import com.bytetrio.financial.model.CustomerFinancialDTO;
 import com.bytetrio.financial.model.DeliveryFinancial;
 import com.bytetrio.financial.model.DeliveryFinancialDTO;
@@ -33,9 +33,19 @@ public class FinancialController {
         return service.addCustomerFinance(token, customerFinancialJsonString, subscriptionJsonString);
     }
 
+    @PostMapping("/add-subscription")
+    public ResponseEntity<String> addSubscription(@RequestParam String token, @RequestParam String subscriptionJsonString) throws IOException {
+        return service.insertSubscription(token, subscriptionJsonString);
+    }
+
+    @DeleteMapping("/remove-subscription")
+    public ResponseEntity<String> removeSubscription(@RequestParam String token, @RequestParam String subscriptionId) {
+        return service.removeSubscription(token, subscriptionId);
+    }
+
     @DeleteMapping("/cancel-subscription")
-    public ResponseEntity<String> cancelSubscription(@RequestParam String token, @RequestParam String customerId, @RequestParam String subscriptionId) {
-        return service.cancelSubscription(token, customerId, subscriptionId);
+    public ResponseEntity<String> cancelSubscription(@RequestParam String token, @RequestParam String subscriptionId) {
+        return service.cancelSubscription(token, subscriptionId);
     }
 
     @GetMapping("/generate-bill")
@@ -44,7 +54,7 @@ public class FinancialController {
     }
 
     @PostMapping("/delivery-done")
-    public ResponseEntity<String> addDelivery(@RequestParam String token, @RequestParam DeliveryFinancial deliveryFinancial, @RequestParam(required = false) String deliveryId) {
+    public ResponseEntity<String> addDelivery(@RequestParam String token, @RequestBody DeliveryFinancial deliveryFinancial, @RequestParam(required = false) String deliveryId) {
         return service.addDeliveryData(token, deliveryFinancial, deliveryId);
     }
 

@@ -17,8 +17,8 @@ public interface DeliveryRepository extends JpaRepository<DeliveryFinancial, Str
     @Query(value = "update delivery_financial set total_delivery = :number, total_value_delivery = :value where id = :id ", nativeQuery = true)
     int updateDeliveryFinance(@Param("id") String id, @Param("number") int number, @Param("value") double value);
 
-    @Query(value = "select case when exists (select 1 from delivery_financial where customer_id = :id) then true else false end", nativeQuery = true)
-    boolean checkDeliveryFinance(@Param("customerId") String customerId);
+    @Query(value = "select case when exists (select 1 from delivery_financial where delivery_id = :deliveryId) then true else false end", nativeQuery = true)
+    boolean checkDeliveryFinance(@Param("deliveryId") String deliveryId);
 
-    void deleteAllByCustomerId(String customerId);
+    void deleteAllByDeliveryId(String deliveryId);
 }
