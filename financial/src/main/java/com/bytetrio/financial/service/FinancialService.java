@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bytetrio.financial.config.CustomerFeignController;
 import com.bytetrio.financial.config.TokenConfig;
 import com.bytetrio.financial.model.CustomerFinancial;
 import com.bytetrio.financial.model.CustomerFinancialDTO;
@@ -51,6 +52,12 @@ public class FinancialService {
         this.subsRepo = subsRepo;
     }
 
+    private CustomerFeignController customerFeignController;
+    @Autowired
+    private void setCustomerFeignController(CustomerFeignController customerFeignController) {
+        this.customerFeignController = customerFeignController;
+    }
+
     private String doDecoding(String word) {return new String(Base64.getDecoder().decode(word));}
 
     private CustomerFinancialDTO giveCustomerFinancialDTO(CustomerFinancial financial) {
@@ -64,6 +71,12 @@ public class FinancialService {
     public ResponseEntity<String> addCustomerFinance(String token, String financialJsonString, String subscriptionJsonString) throws IOException {
         boolean isCustomer = config.isMember(token);
         String username = config.getUsername(token);
+        Boolean response = customerFeignController.checkCustomerPresent(token).getBody();
+
+        if (response != null && !response) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("First add customer data");
+        }
+
         CustomerFinancial financial = new ObjectMapper().readValue(doDecoding(financialJsonString), CustomerFinancial.class);
         Subscription subscription = new ObjectMapper().readValue(doDecoding(subscriptionJsonString), Subscription.class);
         boolean existsSubscription = subsRepo.existsById(subscription.getId());
@@ -78,7 +91,7 @@ public class FinancialService {
 
         }
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This is not member give member....");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(existsSubscription? "This is not member give member...." : "The subscription do not exist...");
 
     }
 

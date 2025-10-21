@@ -35,11 +35,11 @@ public class Api {
             ).and(
                 delete("customer-delete", "http://customer:8082", "/customer/**")
             ).and(
-                post("financial-post", "http://financial:8082", "/financial/**")
+                post("financial-post", "http://financial:8083", "/financial/**")
             ).and(
-                get("financial-get", "http://financial:8082", "/financial/**")
+                get("financial-get", "http://financial:8083", "/financial/**")
             ).and(
-                delete("financial-delete", "http://financial:8082", "/financial/**")
+                delete("financial-delete", "http://financial:8083", "/financial/**")
             );
     }
 

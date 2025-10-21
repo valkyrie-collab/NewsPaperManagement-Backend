@@ -55,4 +55,9 @@ public class CustomerController {
         return service.removeCustomer(customerId);
     }
 
+    @GetMapping("/check-customer-details")
+    public ResponseEntity<Boolean> checkCustomerPresent(@RequestParam String token) {
+        return service.checkCustomer(token);
+    }
+
 }
