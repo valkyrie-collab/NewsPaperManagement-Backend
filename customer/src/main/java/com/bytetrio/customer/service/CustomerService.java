@@ -36,6 +36,10 @@ public class CustomerService {
 
     private String doDecoding(String word) {return new String(Base64.getDecoder().decode(word));}
 
+    public ResponseEntity<Boolean> checkCustomerPresent(String token) {
+        return ResponseEntity.status(HttpStatus.OK).body(customerRepo.existsById(config.getUsername(token)));
+    }
+
     public ResponseEntity<String> add(String token, String customerJsonDataString, MultipartFile imageFile) throws IOException {
         Customer customer = new ObjectMapper().readValue(doDecoding(customerJsonDataString), Customer.class);
         // System.out.println("Username: " + config.getUsername(token));
